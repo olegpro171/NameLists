@@ -1,4 +1,8 @@
-namespace NameLists;
+#define OUTPUT_MAP_AS_SECTOR
+
+using System.Text;
+
+namespace NameLists.DataStructures;
 
 public class Field
 {
@@ -18,7 +22,12 @@ public class Field
         if (Values.Count == 0)
             //return $"{Identifier} = ,";
             return string.Empty;
-
+        
+#if OUTPUT_MAP_AS_SECTOR
+        if (Identifier == "MAP")
+            return ToStringAsSector();
+#endif
+        
         var parts = new List<string>();
         int count = 1;
         Value current = Values[0];
@@ -44,4 +53,31 @@ public class Field
         else
             return $"{Identifier} = {string.Join(", ", parts)},";
     }
+
+#if OUTPUT_MAP_AS_SECTOR
+    private string ToStringAsSector()
+    {
+        var outputSB = new StringBuilder();
+        outputSB.AppendLine($"{Identifier} =");
+        outputSB.Append("  ");
+
+        int line = 1, countOnCurrentLine = 0, count = 0;
+
+        foreach (var value in Values)
+        {
+            if (countOnCurrentLine == line)
+            {
+                line++;
+                countOnCurrentLine = 0;
+                outputSB.AppendLine();
+                outputSB.Append("  ");
+            }
+            
+            outputSB.Append($"{value.ToString().PadLeft(4)}, ");
+            countOnCurrentLine++;
+        }
+        
+        return outputSB.ToString();
+    }
+#endif
 }

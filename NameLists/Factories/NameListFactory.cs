@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using ReflectorGrid.Processing.NameLists;
+using NameLists.DataStructures;
 
 namespace NameLists.Factories;
 

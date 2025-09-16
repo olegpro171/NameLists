@@ -22,7 +22,7 @@ public static class TextFileReader
 
             return text;
         }
-        catch (Exception ex) when (ex is System.IO.FileNotFoundException || ex is System.IO.DirectoryNotFoundException)
+        catch (Exception ex) when (ex is FileNotFoundException or DirectoryNotFoundException)
         {
             throw new DirectoryNotFoundException($"Не найден файл по указанной директории: {filename}", ex);
         }

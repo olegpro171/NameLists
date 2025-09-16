@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using NameLists.DataStructures;
 
 namespace NameLists.Factories;
 

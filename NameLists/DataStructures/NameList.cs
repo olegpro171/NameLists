@@ -1,8 +1,7 @@
 ﻿using System.Text;
 using NameLists.Factories;
-using ReflectorGrid.Processing.NameLists;
 
-namespace NameLists;
+namespace NameLists.DataStructures;
 
 public class NameList
 {

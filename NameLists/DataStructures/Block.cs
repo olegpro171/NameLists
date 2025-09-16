@@ -1,7 +1,6 @@
 using System.Text;
-using ReflectorGrid.Processing.NameLists;
 
-namespace NameLists;
+namespace NameLists.DataStructures;
 
 public class Block
 {
@@ -32,13 +31,15 @@ public class Block
     public override string ToString()
     {
         // расчет самого длинного имени поля для выравнивания
-        var identCount = Fields.Max(x => x.Identifier.Length) + NameListParameters.BaseIdent;
+        var identCount = Fields.Max(x => x.Identifier.Length);
         
         var outputSB = new StringBuilder();
         
         outputSB.AppendLine($"{NameListParameters.BlockIdTag}{BlockId}");
         foreach (var field in Fields)
         {
+            if (NameListParameters.BaseIdent > 0)
+                outputSB.Append(' ', NameListParameters.BaseIdent);
             outputSB.AppendLine($"{field.ToString(identCount)}");
         }
         outputSB.AppendLine($"{NameListParameters.BlockIdTag}{NameListParameters.BlockEndKeyword}");

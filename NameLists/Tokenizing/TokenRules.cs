@@ -1,12 +1,11 @@
 using NameLists.Factories;
-using static NameLists.Factories.FieldFactory.TokenType;
+using static NameLists.Tokenizing.TokenType;
 
-namespace NameLists;
+namespace NameLists.Tokenizing;
 
-internal static class TokensHelper
+internal static class TokenRules
 {
-    
-    private static readonly Dictionary<FieldFactory.TokenType, HashSet<FieldFactory.TokenType>> ExpectedTokens = new()
+    private static readonly Dictionary<TokenType, HashSet<TokenType>> ExpectedTokens = new()
     {
         { Identifier, [EqualsToken] },
         { EqualsToken, [ValueToken]},
@@ -15,7 +14,7 @@ internal static class TokensHelper
         { Delimeter, [ValueToken, Identifier] }
     };
 
-    public static bool IsValidToken(FieldFactory.TokenType previous, FieldFactory.TokenType next)
+    public static bool IsValidOrder(TokenType previous, TokenType next)
     {
         return ExpectedTokens.ContainsKey(previous) && ExpectedTokens[previous].Contains(next);
     }

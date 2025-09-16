@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace NameLists;
+namespace NameLists.DataStructures;
 
 public abstract record Value
 {
@@ -20,7 +20,7 @@ public record DoubleValue(double Data) : Value
     {
         if (Helpers.DoubleUtils.CountDigits(Data) <= 7)
         {
-            return Data.ToString("0.0#####", CultureInfo.InvariantCulture);;
+            return Data.ToString("0.0#####", CultureInfo.InvariantCulture);
         }
 
         return Data.ToString("0.0#####E0", CultureInfo.InvariantCulture);
