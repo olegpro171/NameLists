@@ -3,21 +3,45 @@ using ReflectorGrid.Processing.NameLists;
 
 namespace NameLists;
 
-public class Block(string blockId, List<Field> fields)
+public class Block
 {
-    public string BlockId { get; } = blockId ?? throw new ArgumentNullException(nameof(blockId));
-    public List<Field> Fields { get; } = fields ?? throw new ArgumentNullException(nameof(fields));
+    public string BlockId { get; }
+    public List<Field> Fields { get; }
 
+
+    
+    public Block(string blockId)
+    {
+        BlockId = blockId;
+    }
+    public Block(string blockId, List<Field> fields) : this(blockId)
+    {
+        Fields = new List<Field>(fields.Count);
+        fields.ForEach(AddField);
+    }
+
+    
+    
+    public void AddField(Field field)
+    {
+        if (Fields.Any(x => x.Identifier == field.Identifier))
+            throw new ArgumentException($"Поле с идентификатором {field.Identifier} уже существует в блоке {BlockId}");
+        Fields.Add(field);
+    }
+    
     public override string ToString()
     {
+        // расчет самого длинного имени поля для выравнивания
+        var identCount = Fields.Max(x => x.Identifier.Length) + NameListParameters.BaseIdent;
+        
         var outputSB = new StringBuilder();
         
-        outputSB.AppendLine($"{NameListParameters.NameListIdTag}{BlockId}");
+        outputSB.AppendLine($"{NameListParameters.BlockIdTag}{BlockId}");
         foreach (var field in Fields)
         {
-            outputSB.AppendLine($"  {field.ToString()}");
+            outputSB.AppendLine($"{field.ToString(identCount)}");
         }
-        outputSB.AppendLine($"{NameListParameters.NameListIdTag}{NameListParameters.BlockEndKeyword}");
+        outputSB.AppendLine($"{NameListParameters.BlockIdTag}{NameListParameters.BlockEndKeyword}");
         
         return outputSB.ToString();
     }

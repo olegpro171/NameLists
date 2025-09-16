@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace NameLists.Factories;
 
-public static partial class BlockFactory
+internal static partial class BlockFactory
 {
     private static readonly Regex blockPattern = GetBlockRegex();
     

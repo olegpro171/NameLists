@@ -8,7 +8,7 @@ using ReflectorGrid.Processing.NameLists;
 
 namespace NameLists.Factories;
 
-public static partial class FieldFactory
+internal static partial class FieldFactory
 {
     public enum TokenType
     {
@@ -66,7 +66,7 @@ public static partial class FieldFactory
             tokenType = GetTokenType(token);
             
             
-            if (previousTokenType is not null && !ExpectedTokensHelper.IsValidToken((TokenType)previousTokenType, (TokenType)tokenType))
+            if (previousTokenType is not null && !TokensHelper.IsValidToken((TokenType)previousTokenType, (TokenType)tokenType))
                 throw new DataException("Неожиданный токен: " + token);
             else if (previousTokenType is null && tokenType != TokenType.Identifier)
                 throw new DataException("Неожиданный токен: " + token);

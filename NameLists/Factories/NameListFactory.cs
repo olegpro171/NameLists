@@ -3,14 +3,14 @@ using ReflectorGrid.Processing.NameLists;
 
 namespace NameLists.Factories;
 
-public static partial class NameListFactory
+internal static partial class NameListFactory
 {
     public static NameList CreateFromText(string rawText)
     {
         string variantName = ExtractVariantName(rawText);
         
         List<Block> blocks = BlockFactory.CreateFromText(rawText);
-
+        
         return new NameList(variantName, blocks);
     }
 

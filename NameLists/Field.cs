@@ -11,10 +11,13 @@ public class Field
         Values = values;
     }
 
-    public override string ToString()
+
+    public override string ToString() => ToString(indent: 0);
+    public string ToString(int indent)
     {
         if (Values.Count == 0)
-            return $"{Identifier} = ,";
+            //return $"{Identifier} = ,";
+            return string.Empty;
 
         var parts = new List<string>();
         int count = 1;
@@ -35,7 +38,10 @@ public class Field
         }
         // add the last run
         parts.Add(count > 1 ? $"{count}*{current}" : current.ToString());
-
-        return $"{Identifier} = {string.Join(", ", parts)},";
+        
+        if (indent > 0)
+            return $"{Identifier.PadRight(indent)} = {string.Join(", ", parts)},";
+        else
+            return $"{Identifier} = {string.Join(", ", parts)},";
     }
 }

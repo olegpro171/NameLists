@@ -1,7 +1,8 @@
 namespace ReflectorGrid.Processing.NameLists;
 
-public static class NameListParameters
+internal static class NameListParameters
 {
+    public const int BaseIdent = 0;
     public const char NameListIdTag = '#';
     public const char BlockIdTag = '&';
     public const string BlockEndKeyword = "END";

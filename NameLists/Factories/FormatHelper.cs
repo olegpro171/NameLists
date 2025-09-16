@@ -2,7 +2,7 @@ using ReflectorGrid.Processing.NameLists;
 
 namespace NameLists.Factories;
 
-public static class FormatHelper
+internal static class FormatHelper
 {
     public static string RemoveCommentLines(string content)
     {

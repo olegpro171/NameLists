@@ -3,9 +3,10 @@ using static NameLists.Factories.FieldFactory.TokenType;
 
 namespace NameLists;
 
-public static class ExpectedTokensHelper
+internal static class TokensHelper
 {
-    public static Dictionary<FieldFactory.TokenType, HashSet<FieldFactory.TokenType>> ExpectedTokens = new()
+    
+    private static readonly Dictionary<FieldFactory.TokenType, HashSet<FieldFactory.TokenType>> ExpectedTokens = new()
     {
         { Identifier, [EqualsToken] },
         { EqualsToken, [ValueToken]},
